@@ -1,0 +1,24 @@
+<%= form_with(model: post, local: true) do |f| %>
+
+<%# エラーの記述%>
+<% if post.errors.any? %>
+  <h2><%= pluralize(post.errors.count, "error") %> prohibited this post form being saved</h2>
+  <ul>
+    <%= post.errors.each do |error| %>
+    <li><%= error.full_message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= f.label :content %>
+<%= f.text_field :content %>
+
+<%= f.label :image %>
+<%= f.file_field :image %>
+<%= f.hidden_field :image_cache %>
+
+<%= f.submit 'Create your Post' %>
+
+<% end %>
+
+<% link_to '一覧へ戻る', posts_path %>
