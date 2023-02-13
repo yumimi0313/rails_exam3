@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only:[:show, :edit, :update, :destroy]
 
   def index
-    @post = Post.all
+    @posts = Post.all
   end
 
   def new
@@ -13,11 +13,15 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     #postsはuserモデルで定義したアソシエーション、buildはアソシエーションのNewバージョン
     @post = current_user.posts.build(post_params)
-    if @post.save
-      PostMailer.post_mail(@post).deliver
-      redirect_to post_params, notice: "保存しました"
-    else
+    if params[:back]
       render :new
+    else
+      if @post.save
+      PostMailer.post_mail(@post).deliver
+      redirect_to posts_path, notice: "保存しました"
+      else
+      render :new
+      end
     end
   end
   
@@ -28,14 +32,20 @@ class PostsController < ApplicationController
   end
 
   def show
+    @favorite = current_user.favorites.find_by(post_id: @post.id)
   end
 
   def edit
+    if current_user.id != @post.user_id
+      redirect_to posts_path
+    else
+      render :edit
+    end
   end
 
   def update
    if @post.update(post_params)
-      redirect_to post_params, notice: "保存しました"
+      redirect_to posts_path, notice: "保存しました"
     else
       render :edit
    end

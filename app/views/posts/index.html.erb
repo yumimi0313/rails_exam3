@@ -6,16 +6,19 @@
     <td>画像</td>
     <td>投稿者</td>
   </tr>
-  <%= @post.each do |post| %>
-  <tr>
-    <th><%= post.content %></th>
-    <th><%= post.image %></th>
-    <th><%= post.user.name %></th>
-    <th><%= link_to '詳細を見る', post_path(post) %></th>
-    <th><%= link_to '編集する', edit_post_path(post) %></th>
-    <th><%= link_to '削除する', post_path(post), method: :delete, data: { confirm: '本当に削除しても良いですか？' } %></th>
-  </tr>
+  <% @posts.each do |post| %>
+    <tr>
+      <th><%= post.content %></th>
+      <th><%= post.image %></th>
+      <th><%= post.user.name %></th>
+      <th><%= link_to '詳細を見る', post_path(post) %></th>
+      <% if current_user.id == post.user_id %>
+      <th><%= link_to '編集する', edit_post_path(post) %></th>
+      <th><%= link_to '削除する', post_path(post), method: :delete, data: { confirm: '本当に削除しても良いですか？' } %></th>
+      <% else %>
+      <% end %>
+    </tr>
+  <% end %>
 </table>
 
 <%= link_to '新しく投稿する', new_post_path %>
-<% end %>

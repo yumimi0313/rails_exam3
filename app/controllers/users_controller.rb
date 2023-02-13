@@ -19,6 +19,11 @@ class UsersController < ApplicationController
   end
 
   def edit
+    if current_user.id != @user.id
+      redirect_to posts_path
+    else
+      render :edit
+    end
   end
 
   def update
