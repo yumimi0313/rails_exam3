@@ -11,11 +11,20 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    #postsはuserモデルで定義したアソシエーション、buildはアソシエーションのNewバージョン
+    @post = current_user.posts.build(post_params)
     if @post.save
+      PostMailer.post_mail(@post).deliver
       redirect_to post_params, notice: "保存しました"
     else
       render :new
     end
+  end
+  
+  def confirm
+    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
+    render :new if @post.invalid? 
   end
 
   def show
