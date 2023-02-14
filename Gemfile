@@ -31,6 +31,10 @@ group :test do
   gem 'webdrivers'
 end
 
+gem 'net-smtp'
+gem 'net-imap'
+gem 'net-pop'
+
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'bcrypt'
