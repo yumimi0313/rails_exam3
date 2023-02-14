@@ -12,6 +12,7 @@
   
   <header>
     <li><%= link_to 'HOME', posts_path %></li>
+    <li><%= link_to 'お気に入り一覧', favorites_path %></li>
     
     <% if logged_in? %>
       <li><%= link_to 'Profille', user_path(current_user.id) %></li>
@@ -31,6 +32,6 @@
   </body>
 
   <footer>
-  <p>作成：rails_exam3</p>
+    <p>作成：rails_exam3</p>
   </footer>
 </html>

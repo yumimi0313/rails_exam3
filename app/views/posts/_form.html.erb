@@ -1,25 +1,25 @@
 <%= form_with(model: post, url: choose_new_or_edit, local: true) do |f| %>
 
-<%# エラーの記述%>
-<% if post.errors.any? %>
-  <h2><%= pluralize(post.errors.count, "error") %> prohibited this post form being saved</h2>
-  <ul>
-    <% post.errors.each do |error| %>
-    <li><%= error.full_message %></li>
-    <% end %>
-  </ul>
-<% end %>
+  <%# エラーの記述%>
+  <% if post.errors.any? %>
+    <h2><%= pluralize(post.errors.count, "error") %> prohibited this post form being saved</h2>
+    <ul>
+      <% post.errors.each do |error| %>
+      <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
 
-<%= f.label :content %>
-<%= f.text_field :content %>
+  <%= f.label :content %>
+  <%= f.text_field :content %>
 
-<%= f.label :image %>
-<%# 確認画面から新規作成に戻った時にアップロードした画像を表示させるための記述、if文以下は画像がnilの時エラーになるから %>
-<%= image_tag(post.image.url) if post.image && post.image.url %>
-<%= f.file_field :image %>
-<%= f.hidden_field :image_cache %>
+  <%= f.label :image %>
+  <%# 確認画面から新規作成に戻った時にアップロードした画像を表示させるための記述、if文以下は画像がnilの時エラーになるから %>
+  <%= image_tag(post.image.url) if post.image && post.image.url %>
+  <%= f.file_field :image %>
+  <%= f.hidden_field :image_cache %>
 
-<%= f.submit 'Create your Post' %>
+  <%= f.submit 'Create your Post' %>
 
 <% end %>
 

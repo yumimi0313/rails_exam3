@@ -1,0 +1,15 @@
+<h1>お気に入り一覧</h1>
+
+<table>
+  <% @favorites.each do |f| %>
+    <tr>
+      <td><%= f.post.content %></td>
+    </tr>
+    <tr>
+      <td><%= image_tag(f.post.image.url) if f.post.image && f.post.image.url %></td>
+    </tr>
+    <tr>
+      <td><%= f.post.user.name %></td>
+    </tr>
+  <% end %>
+</table>
