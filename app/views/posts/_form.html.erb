@@ -14,8 +14,8 @@
 <%= f.text_field :content %>
 
 <%= f.label :image %>
-<%# 確認画面から新規作成に戻った時にアップロードした画像を表示させるための記述　%>
-<%= image_tag(post.image.url) if post.image && post.image_cache %>
+<%# 確認画面から新規作成に戻った時にアップロードした画像を表示させるための記述、if文以下は画像がnilの時エラーになるから %>
+<%= image_tag(post.image.url) if post.image && post.image.url %>
 <%= f.file_field :image %>
 <%= f.hidden_field :image_cache %>
 
