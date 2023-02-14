@@ -1,5 +1,13 @@
 <h1>Show</h1>
 
+<% unless current_user.id == @post.user_id %>
+  <% if @favorite.present? %>
+    <%= link_to 'お気に入りを解除する', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
+  <% else %>
+    <%= link_to 'お気に入りする', favorites_path(post_id: @post.id), method: :post, class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
+
 <p>
 <strong>内容</strong>
 <%= @post.content %>
