@@ -6,7 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   
@@ -20,14 +20,17 @@
       <li><%= link_to 'Sign in', new_user_path %></li>
       <li><%= link_to 'Log in', new_session_path %></li>
     <% end %>
-
   </header>
 
   <body>
-  <% flash.each do |key, value| %>
-    <%= content_tag(:div, value, class: "#{key}") %>
-  <% end %>
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
+    <% end %>
 
     <%= yield %>
   </body>
+
+  <footer>
+  <p>作成：rails_exam3</p>
+  </footer>
 </html>
